@@ -1,0 +1,192 @@
+<main class="main-wrapper">
+
+    <!-- Start Checkout Area  -->
+    <div class="axil-checkout-area axil-section-gap">
+        <div class="container">
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="axil-checkout-notice">
+                            <div class="tab-pane" id="nav-address" role="tabpanel">
+                                <div class="axil-dashboard-address">
+                                    <!-- <p class="notice-text">.</p> -->
+                                    <a href="#" onclick="return false;" (click)="newAddress()">NUEVA DIRECCIÓN +</a>
+                                    <div class="row row--30">
+                                        <ng-container *ngFor="let list_address of listAdressClient;let i=index">
+                                            <div class="col-lg-6">
+                                                <div class="address-info mb--40">
+                                                    <div class="addrss-header d-flex align-items-center justify-content-between">
+                                                        <h4 class="title mb-0">Dirección: #{{ i+1 }}</h4>
+                                                        <a href="#" onclick="return false;" class="address-edit" (click)="addressClientSelected(list_address)"><i class="far fa-edit"></i></a>
+                                                    </div>
+                                                    <ul class="address-details">
+                                                        <li>Nombre y apellido: {{ list_address.name + ' ' +list_address.surname }}</li>
+                                                        <li>Email: {{ list_address.email }}</li>
+                                                        <li>Telefono: {{ list_address.telefono }}</li>
+                                                        <li class="mt--30">{{ list_address.address }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        
+                                        <!-- <div class="col-lg-6">
+                                            <div class="address-info">
+                                                <div class="addrss-header d-flex align-items-center justify-content-between">
+                                                    <h4 class="title mb-0">Billing Address</h4>
+                                                    <a href="#" class="address-edit"><i class="far fa-edit"></i></a>
+                                                </div>
+                                                <ul class="address-details">
+                                                    <li>Name: Annie Mario</li>
+                                                    <li>Email: annie@example.com</li>
+                                                    <li>Phone: 1234 567890</li>
+                                                    <li class="mt--30">7398 Smoke Ranch Road <br>
+                                                    Las Vegas, Nevada 89128</li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="axil-checkout-billing">
+                            <h4 class="title mb--40">Billing details</h4>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Nombres Completos <span>*</span></label>
+                                        <input type="text" id="first-name" [(ngModel)]="name" name="name" placeholder="Adam">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Apellidos Completos <span>*</span></label>
+                                        <input type="text" id="last-name" [(ngModel)]="surname" name="surname" placeholder="John">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Pais <span>*</span></label>
+                                <select id="Region" [(ngModel)]="pais" name="pais">
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Peru">Peru</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="Brazil">Brazil</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Dirección <span>*</span></label>
+                                <input type="text" id="address1" class="mb--15" [(ngModel)]="address" name="address" placeholder="House number and street name">
+                                <input type="text" id="address2" [(ngModel)]="referencia" name="referencia" placeholder="Apartment, suite, unit, etc. (optonal)">
+                            </div>
+                            <div class="form-group">
+                                <label>Region</label>
+                                <input type="text" [(ngModel)]="region" name="region" id="country">
+                            </div>
+                            <div class="form-group">
+                                <label>Ciudad <span>*</span></label>
+                                <input type="text" [(ngModel)]="ciudad" name="ciudad" id="town">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefono <span>*</span></label>
+                                <input type="tel" [(ngModel)]="telefono" name="telefono" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label>Email <span>*</span></label>
+                                <input type="email" [(ngModel)]="email" name="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Notas (optional)</label>
+                                <textarea id="notes" rows="2" [(ngModel)]="nota" name="nota" placeholder="Notes about your order, e.g. speacial notes for delivery."></textarea>
+                            </div>
+                            <button type="button" *ngIf="!address_client_selected" (click)="store()" class="axil-btn btn-bg-primary checkout-btn">REGISTRAR DIRECCIÓN</button>
+                            <button type="button" *ngIf="address_client_selected" (click)="store()" class="axil-btn btn-bg-primary checkout-btn">GUARDAR CAMBIOS DIRECCIÓN</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="axil-order-summery order-checkout-summery">
+                            <h5 class="title mb--20">Tu comprs</h5>
+                            <div class="summery-table-wrap">
+                                <table class="table summery-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let cart of listCarts">
+                                            <tr class="order-product">
+                                                <td>{{ cart.product.title }} <span class="quantity">x{{ cart.cantidad }}</span></td>
+                                                <td>{{ cart.total }} USD </td>
+                                            </tr>
+                                        </ng-container>
+                                        
+                                        <tr class="order-subtotal">
+                                            <td>Subtotal</td>
+                                            <td>{{ totalCarts }} USD</td>
+                                        </tr>
+                                        <tr class="order-shipping">
+                                            <td colspan="2">
+                                                <div class="shipping-amount">
+                                                    <span class="title">Metodo de pago</span>
+                                                    <span class="amount">$0.00</span>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input type="radio" id="radio1" name="shipping" checked>
+                                                    <label for="radio1">Free Shippping</label>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input type="radio" id="radio2" name="shipping">
+                                                    <label for="radio2">Local</label>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input type="radio" id="radio3" name="shipping">
+                                                    <label for="radio3">Flat rate</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <td>Total</td>
+                                            <td class="order-total-amount">{{ totalCarts }} USD</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="order-payment-method">
+                                <div class="single-payment">
+                                    <div class="input-group">
+                                        <input type="radio" id="radio4" name="payment">
+                                        <label for="radio4">Direct bank transfer</label>
+                                    </div>
+                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+                                </div>
+                                <div class="single-payment">
+                                    <div class="input-group">
+                                        <input type="radio" id="radio5" name="payment">
+                                        <label for="radio5">Cash on delivery</label>
+                                    </div>
+                                    <p>Pay with cash upon delivery.</p>
+                                </div>
+                                <div class="single-payment">
+                                    <div class="input-group justify-content-between align-items-center">
+                                        <input type="radio" id="radio6" name="payment" checked>
+                                        <label for="radio6">Paypal</label>
+                                        <img src="./assets/images/others/payment.png" alt="Paypal payment">
+                                    </div>
+                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                </div>
+                            </div>
+                            <div #paypal>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Checkout Area  -->
+
+</main>

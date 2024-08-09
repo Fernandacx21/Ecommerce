@@ -1,0 +1,289 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label"><i class="icon-2x text-dark-50 flaticon-price-tag mx-2"></i> Editar producto: {{ product_selected ? product_selected.title : ''}}</h3>
+      </div>
+      <div class="card-toolbar">
+
+      </div>
+    </div>
+    <div class="card-body">
+        <ng-container *ngIf="isLoading$ | async">
+            <span class="spinner spinner-primary ml-5"></span>
+        </ng-container>
+        <div class="form group row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Nombre del producto: <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="title" name="title">
+                    <span class="form-text text-muted">Ingresa el nombre del producto</span> 
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label>SKU del producto: <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="sku" name="title">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Selecciona categoria: <span class="text-danger">*</span></label>
+                    <select
+                    class="form-control"
+                    name="status"
+                    [(ngModel)]="categorie" >
+                    <option value="">Ninguno</option>
+                    <ng-container *ngFor="let item of categories">
+                        <option [value]="item._id">{{item.title}}</option>
+                    </ng-container>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form group row">
+            <div class="col-3">
+            <div class="form-group">
+                <label>Precio en pesos: <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" placeholder="" [(ngModel)]="price_pesos" name="price_pesos">
+            </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Precio en USD: <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="" [(ngModel)]="price_usd" name="price_usd">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <label>tatus del producto: <span class="text-danger">*</span></label>
+                    <select
+                        class="form-control"
+                        name="status"
+                        [(ngModel)]="state">
+                        <option value="1">DEMO</option>
+                        <option value="2">PUBLICO</option>
+                        <option value="3">ANULADO</option></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-3">
+                        <label class="form-label">Sube tu portada: *</label>
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <div class="col_4">
+                    <div class="" *ngIf="imagen_previsualizacion">
+                        <img [src]="imagen_previsualizacion" style="width: 150px;" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-6">
+                    <label class="form-label">RESUMEN DEL PRODUCTO: *</label>
+                        <textarea class="form-control" name="resumen"
+                      [(ngModel)]="resumen" placeholder="" rows="4"></textarea>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Descripción: *</label>
+                <editor apiKey="bf6vn44qdytr358m9ut8dnylidlcnrk1eaukq8f9ef2jp82z"
+                [(ngModel)]="description"
+                [init]="{
+                height: 250,
+                language: 'es',
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar:
+                    'undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }">
+                </editor>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-6 d-flex align-items-center">
+                <div class="form-group">
+                    <label> Tags: <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="tag" name="tag">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary mx-2" (click)="addTag()">Agregar</button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="table-responsive">
+                    <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+                        <thead>
+                            <tr class="text-left">
+                                <th>Palabra</th>
+                                <th>Acción</th>>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of tags; let i = index">
+                                <td>{{ item }}</td>
+                                <td>
+                                    <button class="btn btn-danger" (click)="removeTag(i)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form group row">
+            <div class="col-6">     
+                <div class="form-group row">
+                    <div class="col-12">
+                    <label> Imagenes: <span class="text-danger">*</span></label>
+                    <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                        <label class="form-label">Sube tu imagen: *</label>
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFileGaleria($event)">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div> 
+             </div>
+                    <div class="col-12">
+                        <div class="" *ngIf="imagen_previs_galeria">
+                            <img [src]="imagen_previs_galeria" style="width: 150px;" alt="">
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary mx-2" (click)="storeImagen()">Agregar imagenes</button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="table-responsive">
+                    <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+                        <thead>
+                            <tr class="text-left">
+                                <th>Imagen</th>
+                                <th>Acción</th>>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of galerias; let i = index">
+                                <td>
+                                    <img [src]="item.imagen" style="width: 60px;" alt="" srcset="">
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" (click)="removeImagen(item)">x</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form group row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Inventario: </label>
+                    <div class="radio-inline">
+                        <label class="radio">
+                            <input type="radio" [checked]="type_inventario == 1" name="radios2" (click)="checkedInventario(1)">
+                            <span></span>
+                            Unitario
+                        </label>
+                        <label class="radio">
+                            <input type="radio" [checked]="type_inventario == 2" name="radios2" (click)="checkedInventario(2)">
+                            <span></span>
+                            Multiple
+                        </label>
+                    </div>
+                    <span class="form-text text-muted">Some help text goes here</span>
+                </div>
+            </div>
+            <div class="col-12"></div>
+            <div class="col-6" *ngIf="type_inventario == 1">
+                <div class="form-group">
+                    <label>Stock:  <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="" [(ngModel)]="stock" name="stock">
+                </div>  
+            </div>
+            <div class="col-6" *ngIf="type_inventario == 2">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Valor:  <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="XL,M,SM" [(ngModel)]="valor_multiple" name="stock">
+                        </div> 
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Stock:  <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" placeholder="10,20" [(ngModel)]="stock_multiple" name="stock">
+                        </div> 
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary" (click)="saveVariedad()">+</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+                                <thead>
+                                    <tr class="text-left">
+                                        <th>Valor</th>
+                                        <th>Stock</th>>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let variedad of variedades">
+                                        <td>{{variedad.valor}}</td>
+                                        <td>{{variedad.stock}}</td>
+                                        <td>   
+                                            <a (click)="editVariedad(variedad)" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" ngbTooltip="Editar variedad" ngbTooltipClass="kt-tooltip">
+                                            <span class="svg-icon svg-icon-md svg-icon-primary">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
+                                                        <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                          </a>
+                      
+                                        <a (click)="deleteVariedad(variedad)" class="btn btn-icon btn-light btn-hover-primary btn-sm" ngbTooltip="Eliminar variedad" ngbTooltipClass="kt-tooltip">
+                                          <span class="svg-icon svg-icon-md svg-icon-danger">
+                                              <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
+                                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                      <rect x="0" y="0" width="24" height="24" />
+                                                      <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero" />
+                                                      <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3" />
+                                                  </g>
+                                              </svg>
+                                              <!--end::Svg Icon-->
+                                          </span>
+                                        </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <button class="btn btn-primary" (click)="update()">Editar Producto</button>
+            <button class="btn btn-dark" (click)="listProducts()">Volver</button>
+        </div>
+    </div>
+</div>
+

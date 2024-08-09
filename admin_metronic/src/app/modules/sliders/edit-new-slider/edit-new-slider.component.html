@@ -1,0 +1,84 @@
+<!-- <ng-container *ngIf="isLoading">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container> -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title h4" id="example-modal-sizes-title-lg">
+        <i class="icon-2x text-dark-50 flaticon-file-1 mx-2"></i> EDITAR SLIDER : {{ slider_selected.title }}
+      </div>
+    </div>
+    <div
+      class="overlay overlay-block cursor-default modal-body"
+    >
+      <!-- <ng-container *ngIf="isLoading$ | async">
+        <div class="overlay-layer bg-transparent">
+          <div class="spinner spinner-lg spinner-success"></div>
+        </div>
+      </ng-container> -->
+
+      <div class="row">
+        <div class="col-10">
+            <div class="form-group">
+                <label>Titulo: <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="name" name="name">
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="form-group">
+                <label>Link: <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="link" name="link">
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Estado de slider: <span class="text-danger">*</span></label>
+            <select
+                class="form-control"
+                name="status"
+                placeholder="Estado"
+                [(ngModel)]="state"
+              >
+                <option value="1">Activo</option>
+                <option value="2">Desactivo</option></select
+              >
+        </div>
+        <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <label class="form-label">Sube tu imagen: *</label>
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                    <div class="col-12">
+                        <div class="" *ngIf="imagen_previzualizacion">
+                            <img [src]="imagen_previzualizacion" style="width: 150px;" alt="" srcset="">
+                        </div>
+                    </div>
+                </div>
+        </div>
+      </div>
+</div>
+    <div class="modal-footer">
+
+        <button
+        type="button"
+        class="btn btn-primary btn-elevate mr-2"
+        (click)="save()"
+      >
+        Guardar Cambios
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-light btn-elevate mr-2"
+        (click)="modal.dismiss()"
+      >
+        Cancel
+      </button>
+
+    </div>
+  </div>
+

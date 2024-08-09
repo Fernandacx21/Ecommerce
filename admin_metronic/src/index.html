@@ -1,0 +1,121 @@
+<!doctype html>
+<!--
+Theme: Metronic - The Ultimate Bootstrap Admin Theme
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: You must have a valid license purchased only from https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469/ in order to legally use the theme for your project.
+-->
+<html lang="en">
+<!--
+Use below html tag for RTL version
+<html lang="en" dir="rtl" direction="rtl" style="direction: rtl">
+-->
+<meta charset="utf-8">
+<title>Tapiz Peru | Crm</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="./assets//media//logos//favicon.ico">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700"
+  rel="stylesheet">
+
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" rel="stylesheet"> -->
+
+<!-- Splash Screen | Appears during application initialization proccess -->
+<link href="assets/css/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+
+<!--begin::Page Vendors Styles(used by this page)-->
+<link href="assets/plugins/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+<!-- Splash Screen | Appears during application initialization proccess -->
+<link href="assets/css/style.bundle.min.css" rel="stylesheet" type="text/css" />
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #splash-screen {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f2f3f8;
+  }
+
+  #splash-screen img {
+    margin-left: calc(100vw - 100%);
+    margin-bottom: 30px;
+  }
+
+  #splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .splash-spinner {
+    animation: rotate 2s linear infinite;
+    margin-left: calc(100vw - 100%);
+    width: 50px;
+    height: 50px;
+  }
+
+  .splash-spinner .path {
+    stroke: #5d78ff;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+</style>
+</head>
+
+<body root id="kt_body">
+  <div id="splash-screen">
+    <img src="./assets/media/logos/logo-dark.png" alt="Metronic logo" />
+    <svg class="splash-spinner" viewBox="0 0 50 50">
+      <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+    </svg>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#6993FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
+
+  <!--begin::Global Theme Bundle(used by all pages)-->
+  <script src="assets/plugins/global/plugins.bundle.js"></script>
+  <script src="assets/plugins/prismjs/prismjs.bundle.js"></script>
+  <script src="assets/js/scripts.bundle.min.js"></script>
+  <!--begin::Page Vendors(used by this page)-->
+  <script src="assets/plugins/fullcalendar/fullcalendar.bundle.js"></script>
+
+  <!-- <script type="text/javascript" src="assets/js/jquery.drawr.combined.js"></script> -->
+</body>
+
+</html>

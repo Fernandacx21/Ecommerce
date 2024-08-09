@@ -1,0 +1,178 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label"><i class="icon-2x text-dark-50 flaticon-imac mx-2"></i> EDITAR CUPON: {{ cupone_selected ? cupone_selected.code : '' }}</h3>
+      </div>
+      <div class="card-toolbar">
+            
+      </div>
+    </div>
+    <div class="card-body">
+        <ng-container *ngIf="isLoading$ | async">
+            <span class="spinner spinner-primary ml-5"></span>
+        </ng-container>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Codigo de cupon: <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="" [(ngModel)]="code" name="code">
+                    <span class="form-text text-muted">Ingresa el codigo.</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Tipo de descuento: </label>
+                    <div class="radio-list">
+                        <label class="radio">
+                            <input type="radio" [checked]="type_discount == 1" (click)="checkedTypeDiscount(1)" name="radios1">
+                            <span></span>
+                            PORCENTAJE
+                        </label>
+                        <label class="radio">
+                            <input type="radio" [checked]="type_discount == 2" (click)="checkedTypeDiscount(2)" name="radios1">
+                            <span></span>
+                            MONEDA
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Descuento: <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="" [(ngModel)]="discount" name="discount">
+                    <span class="form-text text-muted">Ingresa la cantidad.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Tipo de uso: </label>
+                    <div class="radio-list">
+                        <label class="radio">
+                            <input type="radio" [checked]="type_count == 1" (click)="checkedTypeCount(1)" name="radios2">
+                            <span></span>
+                            ILIMITADO
+                        </label>
+                        <label class="radio">
+                            <input type="radio" [checked]="type_count == 2" (click)="checkedTypeCount(2)" name="radios2">
+                            <span></span>
+                            LIMITADO
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group" *ngIf="type_count == 2"> 
+                    <label>N° de Usos: <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="" [(ngModel)]="num_use" name="num_use">
+                    <span class="form-text text-muted">Ingresa la cantidad.</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <label>Estado: <span class="text-danger">*</span></label>
+                <select
+                class="form-control"
+                name="status"
+                placeholder="Estado"
+                [(ngModel)]="state"
+              >
+                <option value="1">Activo</option>
+                <option value="2">Desactivo</option></select
+              >
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label>PRODUCTO/CATEGORIAS: </label>
+                    <div class="radio-list">
+                        <label class="radio">
+                            <input type="radio" [checked]="type_segment == 1" (click)="checkedTypeSegment(1)" name="radios3">
+                            <span></span>
+                            PRODUCTO
+                        </label>
+                        <label class="radio">
+                            <input type="radio" [checked]="type_segment == 2" (click)="checkedTypeSegment(2)" name="radios3">
+                            <span></span>
+                            CATEGORIAS
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" *ngIf="type_segment == 1">
+                <div class="form-group">
+                    <label>Selec. Productos: <span class="text-danger">*</span></label>
+                    <select
+                        class="form-control"
+                        name="categorie"
+                        [(ngModel)]="product"
+                    >
+                        <option value="">Ninguno</option>
+                        <ng-container *ngFor="let item of products">
+                            <option [value]="item._id">{{ item.title }}</option>
+                        </ng-container>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="col-4" *ngIf="type_segment == 2">
+                <div class="form-group">
+                    <label>Selec. Categoria: <span class="text-danger">*</span></label>
+                    <select
+                        class="form-control"
+                        name="categorie"
+                        [(ngModel)]="categorie"
+                    >
+                        <option value="">Ninguno</option>
+                        <ng-container *ngFor="let item of categories">
+                            <option [value]="item._id">{{ item.title }}</option>
+                        </ng-container>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-primary" (click)="addProductOrCategorie()">AGREGAR</button>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+                        <thead>
+                            <tr class="text-left">
+                                <th *ngIf="type_segment == 1">PRODUCTO</th>
+                                <th *ngIf="type_segment == 2">CATEGORIA</th>
+                                <th>ACCIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="type_segment == 1">
+                            <tr *ngFor="let product of products_selected">
+                                <td>{{ product.title }}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" (click)="removeProduct(product)">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="type_segment == 2">
+                            <tr *ngFor="let categorie of categories_selected">
+                                <td>{{ categorie.title }}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" (click)="removeCategorie(categorie)">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-12">
+                <button class="btn btn-primary" (click)="update()"> EDITAR CUPON</button>
+            </div>
+        </div>
+    </div>
+  </div>

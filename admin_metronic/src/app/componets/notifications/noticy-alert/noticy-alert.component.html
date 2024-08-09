@@ -1,0 +1,54 @@
+<div class="alert alert-custom alert-notice alert-light-primary fade show mb-0" role="alert" *ngIf="alert=='primary'">
+    <div class="alert-icon"><i class="flaticon2-gear"></i></div>
+    <div class="alert-text">{{txt}}</div>
+    <div class="alert-close">
+        <button type="button" (click)="toast.close()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-custom alert-notice alert-light-warning fade show mb-0" role="alert" *ngIf="alert=='warning'">
+    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+    <div class="alert-text">{{txt}}</div>
+    <div class="alert-close">
+        <button type="button" (click)="toast.close()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-custom alert-notice alert-light-danger fade show mb-0" role="alert" *ngIf="alert=='danger'">
+    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+    <div class="alert-text">{{txt}}</div>
+    <div class="alert-close">
+        <button type="button" (click)="toast.close()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-custom alert-notice alert-light-success fade show mb-0" role="alert" *ngIf="alert=='success'">
+    <div class="alert-icon"><i class="flaticon2-bell-alarm-symbol"></i></div>
+    <div class="alert-text">{{txt}}</div>
+    <div class="alert-close">
+        <button type="button" (click)="toast.close()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-custom alert-notice alert-light-dark fade show mb-0" role="alert" *ngIf="alert=='dark'">
+    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+    <div class="alert-text">{{txt}}</div>
+    <div class="alert-close">
+        <button type="button" (click)="toast.close()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-custom alert-notice alert-light-info fade show mb-0" role="alert" *ngIf="alert=='info'">
+    <div class="alert-icon"><i class="flaticon2-crisp-icons"></i></div>
+    <div class="alert-text">{{txt}}</div>
+    <div class="alert-close">
+        <button type="button" (click)="toast.close()" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+        </button>
+    </div>
+</div>

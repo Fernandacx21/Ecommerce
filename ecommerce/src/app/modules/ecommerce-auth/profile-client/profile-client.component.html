@@ -1,0 +1,332 @@
+<main class="main-wrapper">
+    <!-- Start Breadcrumb Area  -->
+    <div class="axil-breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="inner">
+                        <ul class="axil-breadcrumb">
+                            <li class="axil-breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="separator"></li>
+                            <li class="axil-breadcrumb-item active" aria-current="page">Mi cuenta</li>
+                        </ul>
+                        <h1 class="title">Explora todos los productos</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4">
+                    <div class="inner">
+                        <div class="bradcrumb-thumb" >
+                            <img src="assets/images/product/author1.png" width="100"
+                            height="50" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb Area  -->
+
+    <!-- Start My Account Area  -->
+    <div class="axil-dashboard-area axil-section-gap">
+        <div class="container">
+            <div class="axil-dashboard-warp">
+                <div class="axil-dashboard-author">
+                    <div class="media">
+                        <div class="thumbnail">
+                            <img src="./assets/images/product/author1.png" width="50"
+                            height="50" alt="¡Hola!">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="title mb-0">Bienvenido {{ this.name_c }}</h5>
+                            <span class="joining-date">eTrade Member</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-3 col-md-4">
+                        <aside class="axil-dashboard-aside">
+                            <nav class="axil-dashboard-nav">
+                                <div class="nav nav-tabs" role="tablist">
+                                    <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-dashboard" role="tab" aria-selected="true"><i class="fas fa-th-large"></i>Dashboard</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-orders" role="tab" aria-selected="false"><i class="fas fa-shopping-basket"></i>Ordenes</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-downloads" role="tab" aria-selected="false"><i class="fas fa-file-download"></i>Descargas</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-address" role="tab" aria-selected="false"><i class="fas fa-home"></i>Direcciones</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-user"></i>Detalles de la cuenta</a>
+                                    <a class="nav-item nav-link" href="#" onclick="return false;" (click)="logout()"><i class="fal fa-sign-out"></i>Logout</a>
+                                </div>
+                            </nav>
+                        </aside>
+                    </div>
+                    <div class="col-xl-9 col-md-8">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel">
+                                <div class="axil-dashboard-overview">
+                                    <div class="welcome-text">Hola {{ this.name_c }} (no eres <span>{{ this.name_c }} ?)</span><a href="sign-in.html">  Log Out</a></div>
+                                    <p>
+                                        Desde el panel de su cuenta puede ver sus pedidos recientes, administrar sus direcciones de envío y facturación y editar su contraseña y los detalles de su cuenta.</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-orders" role="tabpanel">
+                                <div class="axil-dashboard-order">
+                                    <div class="table-responsive" *ngIf="!is_detail_sale">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Order</th>
+                                                    <th scope="col">Fecha</th>
+                                                    <th scope="col">Metodo de pago</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container *ngFor="let order of sale_orders">
+                                                    <tr>
+                                                        <th scope="row">#{{ order.sale._id }}</th>
+                                                        <td>{{ getDate(order.sale.createdAt) }}</td>
+                                                        <td>{{ order.sale.method_payment }}</td>
+                                                        <td>{{ order.sale.total }} USD</td>
+                                                        <td><a href="#" onclick="return false;" (click)="viewDetailSale(order)" class="axil-btn view-btn">View</a></td>
+                                                    </tr>
+                                                </ng-container>
+                                                
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <ng-container *ngIf="!sale_detail_selected">
+                                        <div class="table-responsive" *ngIf="is_detail_sale">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Producto</th>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">Categoria</th>
+                                                        <th scope="col">Cantidad</th>
+                                                        <th scope="col">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ng-container *ngFor="let sale_detail of order_selected.sale_details">
+                                                        <tr>
+                                                            <th scope="row">#{{ sale_detail.product.title }}</th>
+                                                            <td> <img [src]="sale_detail.product.imagen" width="100" alt=""> </td>
+                                                            <td>{{ sale_detail.product.categorie.title  }}</td>
+                                                            <td>{{ sale_detail.cantidad }}</td>
+                                                            <td>{{ sale_detail.total }} USD</td>
+                                                            <td><a href="#" onclick="return false;" (click)="viewReview(sale_detail)" class="axil-btn view-btn">RESEÑA</a></td>
+                                                        </tr>
+                                                    </ng-container>
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="#" onclick="return false;" *ngIf="is_detail_sale" (click)="goHome()" class="axil-btn view-btn">REGRESAR</a>
+                                    </ng-container>
+                                    
+
+                                    <ng-container *ngIf="sale_detail_selected">
+                                        <!-- Start Comment Respond  -->
+                                        <div class="comment-respond pro-des-commend-respond mt--0">
+                                            <h5 class="title mb--30">Agrega una reseña</h5>
+                                            <div class="rating-wrapper d-flex-center mb--40">
+                                                Tu calificación <span class="require">*</span>
+                                                <div class="reating-inner ml--20">
+                                                    <a href="#" onclick="return false;" [ngClass]="{'star': cantidad == 1}" (click)="addCantidad(1)"><i class="fal fa-star"></i></a>
+                                                    <a href="#" onclick="return false;" [ngClass]="{'star': cantidad == 2}" (click)="addCantidad(2)"><i class="fal fa-star"></i></a>
+                                                    <a href="#" onclick="return false;" [ngClass]="{'star': cantidad == 3}" (click)="addCantidad(3)"><i class="fal fa-star"></i></a>
+                                                    <a href="#" onclick="return false;" [ngClass]="{'star': cantidad == 4}" (click)="addCantidad(4)"><i class="fal fa-star"></i></a>
+                                                    <a href="#" onclick="return false;" [ngClass]="{'star': cantidad == 5}" (click)="addCantidad(5)"><i class="fal fa-star"></i></a>
+                                                </div>
+                                            </div>
+    
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Otras notas (opcional)</label>
+                                                            <textarea name="description" [(ngModel)]="description" placeholder="Your Comment"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-submit">
+                                                            <button type="button" *ngIf="!sale_detail_selected.review" (click)="save()" class="axil-btn btn-bg-primary w-auto">GUARDAR RESEÑA</button>
+                                                            <button type="button" *ngIf="sale_detail_selected.review" (click)="save()" class="axil-btn btn-bg-primary w-auto">GUARDAR CAMBIOS DE RESEÑA</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <a href="#" onclick="return false;" (click)="goDetail()" class="axil-btn view-btn">REGRESAR</a>
+                                        <!-- End Comment Respond  -->
+                                    </ng-container>
+                                    
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-downloads" role="tabpanel">
+                                <div class="axil-dashboard-order">
+                                    <p>No tienes nada para descargar</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-address" role="tabpanel">
+                                <div class="axil-dashboard-address">
+                                    <p class="notice-text">La siguiente dirección se podra usar como referencia del pago.</p>
+                                    <div class="row row--30">
+                                        <div class="col-12">
+                                            <div class="axil-checkout-notice">
+                                                <div class="tab-pane" id="nav-address" role="tabpanel">
+                                                    <div class="axil-dashboard-address">
+                                                        <!-- <p class="notice-text">.</p> -->
+                                                        <a href="#" onclick="return false;" (click)="newAddress()">NUEVA DIRECCIÓN +</a>
+                                                        <div class="row row--30">
+                                                            <ng-container *ngFor="let list_address of listAdressClient;let i=index">
+                                                                <div class="col-lg-6">
+                                                                    <div class="address-info mb--40">
+                                                                        <div class="addrss-header d-flex align-items-center justify-content-between">
+                                                                            <h4 class="title mb-0">Dirección: #{{ i+1 }}</h4>
+                                                                            <a href="#" onclick="return false;" class="address-edit" (click)="addressClientSelected(list_address)"><i class="far fa-edit"></i></a>
+                                                                        </div>
+                                                                        <ul class="address-details">
+                                                                            <li>Nombre y apellido: {{ list_address.name + ' ' +list_address.surname }}</li>
+                                                                            <li>Email: {{ list_address.email }}</li>
+                                                                            <li>Telefono: {{ list_address.telefono }}</li>
+                                                                            <li class="mt--30">{{ list_address.address }}</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="axil-checkout-billing">
+                                                <h4 class="title mb--40">Detalles de pago</h4>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Nombres Completos <span>*</span></label>
+                                                            <input type="text" id="first-name" [(ngModel)]="name" name="name" placeholder="Adam">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Apellidos Completos <span>*</span></label>
+                                                            <input type="text" id="last-name" [(ngModel)]="surname" name="surname" placeholder="John">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Pais <span>*</span></label>
+                                                    <select id="Region" [(ngModel)]="pais" name="pais">
+                                                        <option value="Mexico">México</option>
+                                                        <option value="Peru">Peru</option>
+                                                        <option value="Argentina">Argentina</option>
+                                                        <option value="Colombia">Colombia</option>
+                                                        <option value="Chile">Chile</option>
+                                                        <option value="Brazil">Brazil</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Dirección <span>*</span></label>
+                                                    <input type="text" id="address1" class="mb--15" [(ngModel)]="address" name="address" placeholder="House number and street name">
+                                                    <input type="text" id="address2" [(ngModel)]="referencia" name="referencia" placeholder="Apartment, suite, unit, etc. (optonal)">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Region</label>
+                                                    <input type="text" [(ngModel)]="region" name="region" id="country">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Ciudad <span>*</span></label>
+                                                    <input type="text" [(ngModel)]="ciudad" name="ciudad" id="town">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Telefono <span>*</span></label>
+                                                    <input type="tel" [(ngModel)]="telefono" name="telefono" id="phone">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email <span>*</span></label>
+                                                    <input type="email" [(ngModel)]="email" name="email" id="email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Notas (optional)</label>
+                                                    <textarea id="notes" rows="2" [(ngModel)]="nota" name="nota" placeholder="Notes about your order, e.g. speacial notes for delivery."></textarea>
+                                                </div>
+                                                <button type="button" *ngIf="!address_client_selected" (click)="store()" class="axil-btn btn-bg-primary checkout-btn">REGISTRAR DIRECCIÓN</button>
+                                                <button type="button" *ngIf="address_client_selected" (click)="store()" class="axil-btn btn-bg-primary checkout-btn">GUARDAR CAMBIOS DIRECCIÓN</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-account" role="tabpanel">
+                                <div class="col-lg-9">
+                                    <div class="axil-dashboard-account">
+                                        <form class="account-details-form">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Primer nombre</label>
+                                                        <input type="text" class="form-control"  [(ngModel)]="name_c" name="name_c">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Last Name</label>
+                                                        <input type="text" class="form-control"  [(ngModel)]="surname_c" name="surname_c">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group mb--40">
+                                                        <label>Email:</label>
+                                                        <input type="text" class="form-control"  [(ngModel)]="email_c" name="email_c">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <h5 class="title">Password Change</h5>
+                                                    <div class="form-group">
+                                                        <label>Nueva contraseña </label>
+                                                        <input type="password" [(ngModel)]="password" name="password" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Confirmar nueva contraseña </label>
+                                                        <input type="password" [(ngModel)]="password_repet" name="password_repet" class="form-control">
+                                                    </div>
+                                                    <div class="form-group mb--0">
+                                                        <input type="button" (click)="updateProfileClient()" class="axil-btn" value="Save Changes">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End My Account Area  -->
+
+    <!-- Start Axil Newsletter Area  -->
+    <div class="axil-newsletter-area axil-section-gap pt--0">
+        <div class="container">
+            <div class="etrade-newsletter-wrapper bg_image bg_image--5">
+                <div class="newsletter-content">
+                    <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
+                    <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
+                    <div class="input-group newsletter-form">
+                        <div class="position-relative newsletter-inner mb--15">
+                            <input placeholder="example@gmail.com" type="text">
+                        </div>
+                        <button type="submit" class="axil-btn mb--15">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End .container -->
+    </div>
+    <!-- End Axil Newsletter Area  -->
+</main>
