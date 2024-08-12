@@ -1,0 +1,306 @@
+isLoading$: Observable<boolean>;
+  isLoadingSubject: BehaviorSubject<boolean>;
+  
+  constructor(
+    private http: HttpClient,
+    public authservice: AuthService,
+  ) {
+    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.isLoading$ = this.isLoadingSubject.asObservable();
+  }
+
+
+<div class="table-responsive">
+        <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+            <thead>
+                <tr class="text-left">
+                    <th class="pr-0" style="width: 50px">Colaborador</th>
+                    <th style="min-width: 150px">Status</th>>
+                    <th class="pr-0 text-right" style="min-width: 150px">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+            </tbody>
+        </table>
+</div>
+
+
+<div>
+        <ngb-pagination
+          [(collectionSize)]="totalPages"
+          [(page)]="currentPage"
+          [pageSize]="20"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="loadPage($event)"
+        ></ngb-pagination>
+</div>
+
+
+<a (click)="editUser(user)" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-1" ngbTooltip="Editar Usuario" ngbTooltipClass="kt-tooltip">
+                    <span class="svg-icon svg-icon-md svg-icon-primary">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
+                                <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                  </a>
+
+                  <a (click)="delete(user)" class="btn btn-icon btn-light btn-hover-primary btn-sm" ngbTooltip="Eliminar Usuario" ngbTooltipClass="kt-tooltip">
+                    <span class="svg-icon svg-icon-md svg-icon-danger">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero" />
+                                <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3" />
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                  </a>
+
+
+,{text:`danger-'Upps! Necesita ingresar las contraseñas iguales.'`}
+
+ToastNotificationsModule.forRoot({duration: 5000, position: 'top-right'}),
+
+<select
+                class="form-control"
+                name="status"
+                placeholder="Filtrar por Estado"
+                formControlName="status"
+              >
+                <option value="">Todos</option>
+                <option value="1">Activo</option>
+                <option value="0">Desactivo</option></select
+              ><small class="form-text text-muted"
+                ><b>Filtrar</b> por Estado</small
+              >
+
+<button class="btn btn-primary ml-2" placement="top" [ngbTooltip]="'Filtro'" (click)="search()">
+                <i class="icon text-white flaticon-search-1"></i>
+            </button>
+            <button class="btn btn-dark ml-2" placement="top" [ngbTooltip]="'Reset'" (click)="reset()">
+                <i class="icon text-white flaticon-refresh"></i>
+            </button>
+
+
+<div class="col-lg-6 col-md-6 col-sm-12 my-2">
+            <label class="form-label">Sube tu imagen: *</label>
+            <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </div>
+
+
+const obtener_imagen = async function(req,res){
+    var img = req.params['img'];
+
+
+    fs.stat('./uploads/productos/'+img, function(err){
+        if(!err){
+            let path_img = './uploads/productos/'+img;
+            res.status(200).sendFile(path.resolve(path_img));
+        }else{
+            let path_img = './uploads/default.jpg';
+            res.status(200).sendFile(path.resolve(path_img));
+        }
+    })
+}
+
+<label class="form-label">RESUMEN DEL PRODUCTO: *</label>
+<textarea class="form-control" name="descriptions"
+                      [(ngModel)]="description" placeholder="" rows="4"></textarea>
+
+<label class="form-label">Descripción: *</label>
+                <editor
+                [init]="{
+                height: 250,
+                menubar: false,
+                language: 'es',
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar:
+                    'undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }"
+                ></editor>
+
+
+<label>Fecha inicio: *</label>
+                <div class="input-group input-group-solid">
+                  <input type="date"
+                  class="form-control form-control-lg form-control-solid"
+                  [(ngModel)]="start_date"
+                  />
+                </div>
+
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label"><i class="icon-2x text-dark-50 flaticon-bag mx-2"></i> REGISTRAR NUEVO PRODUCTO</h3>
+      </div>
+      <div class="card-toolbar">
+      </div>
+    </div>
+    <div class="card-body">
+        <ng-container *ngIf="isLoading$ | async">
+            <span class="spinner spinner-primary ml-5"></span>
+        </ng-container>
+</div>
+</div>
+
+components.ts
+declare var paypal:any;
+
+@ViewChild('paypal',{static: true}) paypalElement?: ElementRef;
+
+<div #paypal ></div>
+
+paypal.Buttons({
+        // optional styling for buttons
+        // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+        style: {
+          color: "gold",
+          shape: "rect",
+          layout: "vertical"
+        },
+
+        // set up the transaction
+        createOrder: (data:any, actions:any) => {
+            // pass in any options from the v2 orders create call:
+            // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+
+            const createOrderPayload = {
+              purchase_units: [
+                {
+                  amount: {
+                      description: "COMPRAR POR EL ECOMMERCE",
+                      value: 50
+                  }
+                }
+              ]
+            };
+
+            return actions.order.create(createOrderPayload);
+        },
+
+        // finalize the transaction
+        onApprove: async (data:any, actions:any) => {
+            
+            let Order = await actions.order.capture();
+		
+		// Order.purchase_units[0].payments.captures[0].id
+
+            return actions.order.capture().then(captureOrderHandler);
+        },
+
+        // handle unrecoverable errors
+        onError: (err:any) => {
+            console.error('An error prevented the buyer from checking out with PayPal');
+        }
+    }).render(this.paypalElement?.nativeElement);
+
+<!-- SCRIPT PAYPAL -->
+  <script src="https://www.paypal.com/sdk/js?client-id=&vault=true"></script>
+
+ENVIO DE MAIL
+
+npm i ejs nodemailer nodemailer-smtp-transport
+
+bilcfvchcrscbseu
+
+var readHTMLFile = function(path, callback) {
+            fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+                if (err) {
+                    throw err;
+                    callback(err);
+                }
+                else {
+                    callback(null, html);
+                }
+            });
+};
+
+var transporter = nodemailer.createTransport(smtpTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            auth: {
+            user: 'tucorreo@gmail.com',
+            pass: 'xxxxxx'
+            }
+        }));
+
+
+
+readHTMLFile(process.cwd() + '/mails/email_sale.html', (err, html)=>{
+                                
+            let rest_html = ejs.render(html, {});
+    
+            var template = handlebars.compile(rest_html);
+            var htmlToSend = template({op:true});
+    
+            var mailOptions = {
+                from: 'tucorreo@gmail.com',
+                to: email_cliente,
+                subject: 'Finaliza tu compra ' + orden._id,
+                html: htmlToSend
+            };
+          
+            transporter.sendMail(mailOptions, function(error, info){
+                if (!error) {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+        
+        });
+
+
+<% for(var i=0; i < array.length; i++) { %>
+
+<% } %>
+
+<% if() { %>
+
+<% } %>
+
+<%=  %>
+
+
+
+import fs from 'fs';
+import handlebars from 'handlebars';
+import ejs from 'ejs';
+import nodemailer from 'nodemailer';
+import smtpTransport from 'nodemailer-smtp-transport';
+
+
+source:any;
+@ViewChild("filter") filter?:ElementRef;
+
+ngAfterViewInit(): void {
+    this.source = fromEvent(this.filter?.nativeElement, "keyup");
+    this.source.pipe(debounceTime(500)).subscribe((c:any) => {
+      let data = {
+        search_product: this.search_product,
+      }
+      if(this.search_product.length > 1){
+        this.examopleService.nameFunction(data).subscribe((resp:any) => {
+          this.sugerencias = resp.products;
+        })
+      }
+    })
+  }
